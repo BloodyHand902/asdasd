@@ -1,60 +1,27 @@
 import requests
-
-
-from random import choice
-
-
-from string import ascii_lowercase
-
-
-from bs4 import BeautifulSoup
-
-
-from colorama import Fore, Style
-
-
-
-
+import json
+import random
+import string
+import time
+import uuid
+import urllib.parse
+import urllib3  # Don't forget to import urllib3
 
 class SendSms():
-
-
     adet = 0
 
-
-    
-
-
     def __init__(self, phone, mail):
-
-
         self.phone = str(phone)
-
-
         if len(mail) != 0:
-
-
             self.mail = mail
-
-
         else:
-
-
-            self.mail = ''.join(choice(ascii_lowercase) for i in range(19))+"@gmail.com"
-
-
-
-
-
-
-
-
+            self.mail = ''.join(random.choice(string.ascii_lowercase) for i in range(19)) + "@gmail.com"
 
 def a101(number):
     try:
         url = "https://www.a101.com.tr/users/otp-login/"
         payload = {
-            "phone" : f"0{number}"
+            "phone": f"0{number}"
         }
         r = requests.post(url=url, json=payload, timeout=5)
         if r.status_code == 200:
